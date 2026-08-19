@@ -1,33 +1,34 @@
 return {
-  -- Colourscheme. "dragon" is a warm, low-contrast dark variant that sits
-  -- comfortably next to WezTerm's Hacktober palette.
+  -- Colourscheme. Ayu Dark, matching WezTerm's "Ayu Dark (Gogh)" scheme and
+  -- the Claude Code status line so the whole terminal reads as one palette.
   {
-    "rebelot/kanagawa.nvim",
+    "Shatur/neovim-ayu",
     lazy = false,
     priority = 1000, -- load before everything else so highlights are set
     opts = {
-      theme = "dragon",
-      background = { dark = "dragon", light = "lotus" },
-      transparent = false,
-      dimInactive = true,
-      terminalColors = true,
-      overrides = function(colors)
-        local theme = colors.theme
+      mirage = false,     -- true would switch the dark variant to Mirage
+      terminal = true,
+      overrides = function()
+        local colors = require("ayu.colors")
+        colors.generate()
+
+        -- Make floating windows and the completion menu read as one surface.
+        -- Borders use guide_active, not panel_border: the latter is pure black
+        -- and disappears against the panel background.
         return {
-          -- Make floating windows and the completion menu read as one surface.
-          NormalFloat = { bg = theme.ui.bg_m3, fg = theme.ui.fg },
-          FloatBorder = { bg = theme.ui.bg_m3, fg = theme.ui.bg_m1 },
-          FloatTitle  = { bg = theme.ui.bg_m3, fg = theme.ui.special, bold = true },
-          Pmenu       = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-          PmenuSel    = { bg = theme.ui.bg_p2, fg = "NONE" },
-          PmenuSbar   = { bg = theme.ui.bg_m1 },
-          PmenuThumb  = { bg = theme.ui.bg_p2 },
+          NormalFloat = { bg = colors.panel_bg, fg = colors.fg },
+          FloatBorder = { bg = colors.panel_bg, fg = colors.guide_active },
+          FloatTitle  = { bg = colors.panel_bg, fg = colors.accent, bold = true },
+          Pmenu       = { bg = colors.panel_bg, fg = colors.fg },
+          PmenuSel    = { bg = colors.selection_bg, fg = "NONE" },
+          PmenuSbar   = { bg = colors.guide_normal },
+          PmenuThumb  = { bg = colors.guide_active },
         }
       end,
     },
     config = function(_, opts)
-      require("kanagawa").setup(opts)
-      vim.cmd.colorscheme("kanagawa")
+      require("ayu").setup(opts)
+      vim.cmd.colorscheme("ayu-dark")
     end,
   },
 
@@ -40,7 +41,7 @@ return {
     event = "VeryLazy",
     opts = {
       options = {
-        theme = "kanagawa",
+        theme = "ayu_dark",
         globalstatus = true,
         section_separators = "",
         component_separators = "|",

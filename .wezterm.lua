@@ -10,7 +10,7 @@ local config = wezterm.config_builder()
 -- Appearance
 --------------------------------------------------------------------------------
 
-config.color_scheme = "Hacktober"
+config.color_scheme = "Ayu Dark (Gogh)"
 
 config.font = wezterm.font_with_fallback({
 	{ family = "JetBrainsMono Nerd Font", weight = "Medium" },

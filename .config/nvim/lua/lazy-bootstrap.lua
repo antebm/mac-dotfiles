@@ -21,7 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = { { import = "plugins" } },
-  install = { colorscheme = { "kanagawa", "habamax" } },
+  install = { colorscheme = { "ayu-dark", "habamax" } },
   checker = { enabled = true, notify = false },
   change_detection = { notify = false },
   ui = { border = "rounded" },

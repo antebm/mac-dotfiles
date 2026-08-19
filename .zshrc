@@ -266,3 +266,4 @@ fi
 #-------------------------------------------------------------------------------
 
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+export PATH="$HOME/.local/bin:$PATH"
